@@ -17,10 +17,11 @@ function App() {
 		setCart([...cart, item]);
 	};
 
-	const removeItem = id => {
-		console.log(id)
-	setCart(cart.filter(item => item.id !== id));
-	}
+	
+	const removeItem = index => {
+		const newCart = cart.filter((item, i) => i !== index)
+		setCart([...newCart])
+}
 
 	return (
 		<ProductContext.Provider value={[products, addItem]}>
@@ -32,15 +33,12 @@ function App() {
 			<Route
 				exact
 				path="/"
-				render={() => (
-					<Products
-					/>
-				)}
+				component={Products}
 			/>
 
 			<Route
 				path="/cart"
-				render={() => <ShoppingCart />}
+				component={ShoppingCart}
 			/>
 		</div>
 		</CartContext.Provider>
